@@ -20,6 +20,6 @@ Last step was to one-hot remaining columns. At this moment data preprocessing st
 
 1) batch-size = 128
 2) epochs = 150
-3) Adam lr=0.0004
+3) Adam lr = 0.0004
 4) dropout = 0.2
 5) activation functions = SiLU, last layer = sigmoid
