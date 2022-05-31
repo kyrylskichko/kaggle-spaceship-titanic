@@ -23,3 +23,8 @@ Last step was to one-hot remaining columns. At this moment data preprocessing st
 3) Adam lr = 0.0004
 4) dropout = 0.2
 5) activation functions = SiLU, last layer = sigmoid
+
+## Accuracy
+
+Best personal submision score: 0.79658
+Top 1 score: 0.84428
