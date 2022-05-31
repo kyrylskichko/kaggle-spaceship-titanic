@@ -1,9 +1,9 @@
 # kaggle-spaceship-titanic
 I made a simple NN for binary classification.
 
-## Steps I did during making model:
+# Steps I did during making model:
 
-Data preprocessing
+## Data preprocessing
 
 Train data has following columns: ["PassengerId", "HomePlanet", "CryoSleep", "Cabin", "Destination", "Age", "VIP", "RoomService", "FoodCourt", "ShoppingMall", "Spa", "VRDeck", "Name", "Transported"].
 
@@ -16,4 +16,12 @@ After this, numeric values were scaled by MinMaxScaler. If we look at "Cabin" co
 ```diff
 - "CabinNum" was droped, but i will try to split numbers into intervals and one-hot them later.
 ```
-Last step was to one-hot remaining columns. At this moment data preprocessing stage is over.
+Last step was to one-hot remaining columns. At this moment data preprocessing stage is over. The only thing that left is splitting data into train/val data.
+
+## Model configuration
+
+batch-size = 128
+epochs = 150
+Adam lr=0.0004
+dropout = 0.2
+activation functions = SiLU, last layer = sigmoid
