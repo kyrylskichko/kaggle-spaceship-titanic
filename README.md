@@ -27,4 +27,4 @@ Last step was to one-hot remaining columns. At this moment data preprocessing st
 ## Accuracy
 
 Best personal submision score: 0.79658
-Top 1 score: 0.84428
+/n Top 1 score: 0.84428
