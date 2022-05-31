@@ -1,8 +1,6 @@
 # kaggle-spaceship-titanic
 I made a simple NN for binary classification.
 
-# Steps I did during making model:
-
 ## Data preprocessing
 
 Train data has following columns: ["PassengerId", "HomePlanet", "CryoSleep", "Cabin", "Destination", "Age", "VIP", "RoomService", "FoodCourt", "ShoppingMall", "Spa", "VRDeck", "Name", "Transported"].
