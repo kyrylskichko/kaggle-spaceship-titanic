@@ -1,9 +1,9 @@
 # kaggle-spaceship-titanic
-I made a simple NN for binary classification.
+I made a simple NN for binary classification.  
 
-## Data preprocessing
+## Data preprocessing  
 
-Train data has following columns: ["PassengerId", "HomePlanet", "CryoSleep", "Cabin", "Destination", "Age", "VIP", "RoomService", "FoodCourt", "ShoppingMall", "Spa", "VRDeck", "Name", "Transported"].
+Train data has following columns: ["PassengerId", "HomePlanet", "CryoSleep", "Cabin", "Destination", "Age", "VIP", "RoomService", "FoodCourt", "ShoppingMall", "Spa", "VRDeck", "Name", "Transported"].  
 
 First step was to drop columns, that has no impact on result, such as "PassengerId" and "Name". Then, Nan values were filled in such way:
 1) Non-numeric columns were replaced with mode value;
@@ -14,17 +14,17 @@ After this, numeric values were scaled by MinMaxScaler. If we look at "Cabin" co
 ```diff
 - "CabinNum" was droped, but i will try to split numbers into intervals and one-hot them later.
 ```
-Last step was to one-hot remaining columns. At this moment data preprocessing stage is over. The only thing that left is splitting data into train/val data.
+Last step was to one-hot remaining columns. At this moment data preprocessing stage is over. The only thing that left is splitting data into train/val data.  
 
 ## Model configuration
 
-1) batch-size = 128
-2) epochs = 150
-3) Adam lr = 0.0004
-4) dropout = 0.2
-5) activation functions = SiLU, last layer = sigmoid
+batch-size = 128  
+epochs = 150  
+Adam lr = 0.0004  
+dropout = 0.2  
+activation functions = SiLU, last layer = sigmoid  
 
 ## Accuracy
 
-Best personal submision score: 0.79658
-/n Top 1 score: 0.84428
+Best personal submision score: 0.79658  
+Top 1 score: 0.84428
