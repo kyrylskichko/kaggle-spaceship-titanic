@@ -6,33 +6,14 @@ import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional as F
 import torch
-import matplotlib.pyplot as plt
 from torch.utils.data import TensorDataset, DataLoader
-from torch.autograd import Variable
 
 train_data = pd.read_csv('data/train.csv')
 test_data = pd.read_csv('data/test.csv')
 pas_ids = test_data["PassengerId"].tolist()
 
-def transfrom_data(df):
-    #HomePlanet, Destination
-    df = df.drop(['PassengerId', 'Cabin', 'Name'], axis=1)
-    df = df.fillna(0)
-    df = df.replace(False, 0)
-    df = df.replace(True, 1)
-    df = df.replace('TRAPPIST-1e', 0)
-    df = df.replace('PSO J318.5-22', 0.5)
-    df = df.replace('55 Cancri e', 1)
-    df = df.replace('Earth', 0)
-    df = df.replace('Europa', 0.5)
-    df = df.replace('Mars', 1)
-    features = ['Age', 'RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
-    scaler = MinMaxScaler()
-    df[features] = scaler.fit_transform(df[features])
-    return df
 
-
-def transform_data1(df):                                            #FIX
+def transform_data(df):
     one_hot_columns = ["HomePlanet", "Destination", "CryoSleep", "VIP", "CabinDeck", "CabinSide"]
     df = df.drop(['PassengerId','Name'], axis=1)
 
@@ -69,7 +50,7 @@ def transform_data1(df):                                            #FIX
 
 
 
-def transform_train_data(df):                                       #FIX
+def transform_train_data(df):
     tempdf = pd.get_dummies(df["Transported"], prefix="Transported")
     df = pd.merge(
         left=df,
@@ -80,7 +61,7 @@ def transform_train_data(df):                                       #FIX
     df = df.drop(columns="Transported")
     return df
 
-train_data = transform_data1(train_data)
+train_data = transform_data(train_data)
 train_data = transform_train_data(train_data).to_numpy(dtype=np.float32)
 
 X_train = train_data[:, :-2]
@@ -91,7 +72,7 @@ X_train, X_val, Y_train, Y_val = train_test_split(X_train, Y_train, test_size=0.
 Y_train = np.reshape(Y_train, (len(Y_train), 2))
 
 Y_val = np.reshape(Y_val, (len(Y_val), 2))
-X_test = transform_data1(test_data).to_numpy(dtype=np.float32) #ERROR
+X_test = transform_data(test_data).to_numpy(dtype=np.float32)
 
 tensor_X_train = torch.Tensor(X_train)
 tensor_Y_train = torch.Tensor(Y_train)
@@ -135,7 +116,6 @@ loss = nn.BCELoss()
 
 epochs = 150
 min_valid_loss = np.inf
-train_l, val_l = [], []
 train_loss = 0
 
 
@@ -181,7 +161,6 @@ preds = []
 count = X_test.shape[0]
 result_np = []
 
-print(X_test.shape)
 for idx in range(0, count):
     pred = model(torch.Tensor(X_test[idx]))
     predicted_class = np.argmax(pred.detach().numpy())
